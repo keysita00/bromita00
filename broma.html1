@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<body style="text-align:center; font-family:sans-serif; background:#ffe6f0; overflow:hidden;">
+<h1 id="texto">Presiona iniciar 💖</h1>
+<button onclick="iniciar()">Iniciar</button>
+<button onclick="detener()">Detener</button>
+
+<script>
+let mensajes = [
+  "Hola...",
+  "eres el amor de mi vida 💘",
+  "te amo mucho ❤️"
+];
+
+let i = 0;
+let intervalo;
+let timeout;
+
+// Crear un corazón animado
+function crearCorazon() {
+  let corazon = document.createElement("div");
+  corazon.innerText = "💖";
+  corazon.style.position = "fixed";
+  corazon.style.left = Math.random() * 100 + "vw";
+  corazon.style.top = Math.random() * 100 + "vh";
+  let size = Math.random() * 20 + 24;
+  corazon.style.fontSize = size + "px";
+  corazon.style.transform = rotate(${Math.random()*360}deg);
+  corazon.style.animation = "flotarExtra 3s linear forwards";
+  document.body.appendChild(corazon);
+  setTimeout(() => corazon.remove(), 3000);
+}
+
+// Crear una rosa animada
+function crearRosa() {
+  let rosa = document.createElement("div");
+  rosa.innerText = "🌹";
+  rosa.style.position = "fixed";
+  rosa.style.left = Math.random() * 100 + "vw";
+  rosa.style.top = "-5vh";
+  let size = Math.random() * 20 + 24;
+  rosa.style.fontSize = size + "px";
+  rosa.style.transform = rotate(${Math.random()*360}deg);
+  rosa.style.animation = "caerExtra 4s linear forwards";
+  document.body.appendChild(rosa);
+  setTimeout(() => rosa.remove(), 4000);
+}
+
+function iniciar() {
+  // Abrir la canción en YouTube
+  window.open("https://www.youtube.com/results?search_query=Polvo+Rara+Sustancia+Rara+Sustancia", "_blank");
+
+  intervalo = setInterval(() => {
+    document.body.style.background =
+      "hsl(" + Math.random() * 360 + ",100%,90%)";
+    document.getElementById("texto").innerText = mensajes[i];
+    crearCorazon();
+    crearRosa();
+    // Vibración suave
+    document.body.style.transform =
+      translate(${Math.random()*8-4}px, ${Math.random()*8-4}px);
+    i = (i + 1) % mensajes.length;
+  }, 1000);
+
+  timeout = setTimeout(() => {
+    finalRomantico();
+  }, 5000);
+}
+
+function detener() {
+  clearInterval(intervalo);
+  clearTimeout(timeout);
+  document.body.style.transform = "translate(0,0)";
+  document.getElementById("texto").innerText = "Broma detenida 😎";
+}
+
+function finalRomantico() {
+  clearInterval(intervalo);
+  document.body.innerHTML = "<h1 style='font-size:40px;'>💖 Santi y Reyna 💖</h1>";
+  setInterval(crearCorazon, 300);
+  setInterval(crearRosa, 400);
+}
+</script>
+
+<style>
+@keyframes flotarExtra {
+  from { transform: translateY(0) rotate(0deg); opacity: 1; }
+  to { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+}
+
+@keyframes caerExtra {
+  from { transform: translateY(0) rotate(0deg); opacity: 1; }
+  to { transform: translateY(120vh) rotate(360deg); opacity: 0; }
+}
+</style>
+
+</body>
+</html>
